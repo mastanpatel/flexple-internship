@@ -5,6 +5,13 @@ class ProfilesController < ApplicationController
     before_action :logged_in_user, only: [:update]
     before_action :correct_user,   only: [:update]
 
+    def show
+        @profile = Profile.find_by_id(params[:id])
+        if !@profile
+            redirect_to root_url
+        end
+    end
+
     def update
         updated_profile_params = update_array_attributes_in_params(profile_params)
         @profile = Profile.find(params[:id])
@@ -25,7 +32,7 @@ class ProfilesController < ApplicationController
 
     private
         def profile_params
-            params.require(:profile).permit(:name, :job_title, :total_experience, :overview, 
+            params.require(:profile).permit(:name, :job_title, :total_experience, :overview, :image,
                 :career_highlights, :primary_skills, :secondary_skills,
                 :educations_attributes => [ :id, :school, :degree, :description, :start, :end, :_destroy],
                 :experiences_attributes => [ :id, :company, :position, :description, :start, :end, :_destroy]
