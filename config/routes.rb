@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get    'signup'  => 'users#new'
   post   'signup'  => 'users#create'
   get 'profiles/:id' => 'profiles#show'
+
+  get    'projects/new/:id' => 'projects#new'
+  
   resources :users
   resources :profiles #, only: [:update]
   resources :educations , only: [:new]

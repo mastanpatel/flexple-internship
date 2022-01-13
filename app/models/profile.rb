@@ -6,6 +6,7 @@ class Profile < ApplicationRecord
     accepts_nested_attributes_for(:educations , reject_if: :reject_education_create, allow_destroy: true)
 
     has_many(:experiences, dependent: :destroy)
+    has_many :projects, through: :experiences
     accepts_nested_attributes_for(:experiences , reject_if: :reject_experience_create, allow_destroy: true)
 
     belongs_to :user
